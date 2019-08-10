@@ -24,6 +24,7 @@ pipeline {
             when { tag "service2/*" }
             steps {
                 echo 'Deploying service 2 only because this commit is tagged...'
+                sh 'env'
                 sh 'echo deploy'
             }
         }
