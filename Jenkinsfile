@@ -15,9 +15,11 @@ pipeline {
         stage('Deploy') {
             when { tag "service*/*" }
             steps {
-                def ver  = semver("${GIT_BRANCH}")
-                echo "Deploying version ${ver}"
-                sh 'echo deploy'
+                script {
+                    def ver = semver("${GIT_BRANCH}")
+                    echo "Deploying version ${ver}"
+                    sh 'echo deploy'
+                }                
             }
         }       
     }
