@@ -26,6 +26,7 @@ pipeline {
 }
 
 def semver(String tag = '') {
-    def version = tag.split('/')[1]
-    return version
+    def parts = tag.split('/')
+    def ver = parts.last()
+    return ver
 }
