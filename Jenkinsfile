@@ -12,21 +12,18 @@ pipeline {
             }
         }
 
-        stage('Deploy Service1') {
-            when { tag "service1/*" }
+        stage('Deploy') {
+            when { tag "service*/*" }
             steps {
-                echo 'Deploying service 1 only because this commit is tagged...'
+                def ver  = semver("${BRANCH_NAME}")
+                echo "Deploying version ${ver}"
                 sh 'echo deploy'
             }
-        }
-
-        stage('Deploy Service2') {
-            when { tag "service2/*" }
-            steps {
-                echo 'Deploying service 2 only because this commit is tagged...'
-                sh 'env'
-                sh 'echo deploy'
-            }
-        }
+        }       
     }
+}
+
+def semver(String tag = '') {
+    def version = tag.split('/')[1]
+    return version
 }
