@@ -13,7 +13,7 @@ pipeline {
         }
 
         stage('Deploy') {
-            when { tag "service*/*" }
+            when { tag "service*/**" }
             steps {
                 script {
                     def ver = semver("${GIT_BRANCH}")
